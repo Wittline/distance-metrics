@@ -1,6 +1,7 @@
 import copy
 import pandas as pd
-import numpy as np 
+import numpy as np
+from scipy.stats import itemfreq
 import switch
 
 class DistanceMetric:
@@ -16,15 +17,21 @@ class DistanceMetric:
     def apply(self):
 
         vectors = self.__vectorize()
-        v_df = pd.DataFrame(vectors, index= self.words)
+        v_df = pd.DataFrame(vectors, index= self.words)            
 
         if self.show:
             print("Vectors")
             print(v_df)
-            print('--'*100)
-            
-        search_word = v_df[v_df.index == self.words[0]].dropna(axis= 1).values[0]
-        similar_words =  [v_df[v_df.index == w].dropna(axis= 1).values[0] for w in words[1:]]
+            print('--'*45)
+                        
+        if self.metric == 'cosine':
+            colums, bag_vectors = self.__bag_characters_vectorize()
+            bag_df = pd.DataFrame(bag_vectors, index = self.words, columns = colums )
+            search_word = bag_df[v_df.index == self.words[0]].values[0]
+            similar_words =  [bag_df[v_df.index == w].values[0] for w in self.words[1:]]        
+        else:
+            search_word = v_df[v_df.index == self.words[0]].dropna(axis= 1).values[0]
+            similar_words =  [v_df[v_df.index == w].dropna(axis= 1).values[0] for w in self.words[1:]]
 
         with switch(self.metric) as s:
             if s.case('hamming', True):
@@ -32,11 +39,11 @@ class DistanceMetric:
             if s.case('manhattan', True):
                 self.__apply_distance_metric(search_word, similar_words, self.words[0], self.words[1:], self.__manhattan_distance)
             if s.case('euclidean', True):
-                return self.__euclidean_distance()
+                self.__apply_distance_metric(search_word, similar_words, self.words[0], self.words[1:], self.__euclidean_distance)        
             if s.case('levenshtein', True):
-                return self.__levenshtein_distance()
+                self.__apply_distance_metric_2(search_word, similar_words, self.words[0], self.words[1:], self.__levenshtein_distance)
             if s.case('cosine', True):
-                return self.__cosine_distance()
+                self.__apply_distance_metric_3(search_word, similar_words, self.words[0], self.words[1:], self.__cosine_distance_similarity)        
             if s.default():
                 print('Please specify a correct distance metric')
 
@@ -47,6 +54,42 @@ class DistanceMetric:
             self.u = search_word
             self.v = tv
             print('{} distance between word: {} and {} is: {}'.format(self.metric, word, t, func()))
+
+
+    def __apply_distance_metric_2(self, search_word, similar_words,word, words, func):
+        
+        for w in words:
+            self.v = w
+            self.u = word
+            d , e = func()
+            print('{} distance between word: {} and {} is: {}'.format(self.metric, word, w, d))
+            print(e)
+            print('-'*45)
+
+    
+    def __apply_distance_metric_3(self, search_word, similar_words,word, words, func):
+        
+        for t, tv in zip(words, similar_words):
+            self.u = search_word
+            self.v = tv            
+            d = round(func(), 2)
+            s = round(1 - d, 2)
+            print('{} distance between word: {} and {} is: {}'.format(self.metric, word, t, d))
+            print('{} similarity between word: {} and {} is: {}'.format(self.metric, word, t, s))
+            print('-'*45)
+                                  
+
+            
+
+    def __bag_characters_vectorize(self):
+
+        wl = [w.lower() for w in self.words]
+        u = np.unique(np.hstack([list(w) for w in wl ]))
+        w_c = [{ c1: c2 for c1, c2 in np.stack(np.unique(list(w), return_counts = True), axis= 1)}
+               for w in wl]
+        bag = [np.array([int(wt.get(char, 0)) for char in u]) for wt in w_c]
+
+        return list(u), bag
 
 
     def __vectorize(self):
@@ -112,18 +155,19 @@ class DistanceMetric:
         edition = np.array(edition)
         edition = edition.T
         edition = edition[1:,]
-        edition = pd.Dataframe(data = edition,
+        edition = pd.DataFrame(data = edition,
                                index= list(v),
                                columns= list(u))
         
         return distance, edition
 
 
-    def __cosine_distance(self):
+    def __cosine_distance_similarity(self):
 
         distance = 1.0 - (np.dot(self.u, self.v)/
                           (np.sqrt(sum(np.square(self.u))) * 
                            np.sqrt(sum(np.square(self.v))))
                           )
         return distance
+    
     
