@@ -58,6 +58,16 @@ It is the distance measured between two words assuming both has the same length 
 
 ![image](https://user-images.githubusercontent.com/8701464/128754190-6617ab28-a203-4153-b0ee-b4a1a40c88dc.png)
 
+```python
+    def __hamming_distance(self):
+
+        if self.u.shape != self.v.shape:
+            return 'Incorrect lengths'
+        elif self.norm:
+            return (self.u!=self.v).mean()            
+        else:
+            return (self.u!=self.v).sum()
+```
 
 ![image](https://user-images.githubusercontent.com/8701464/128754208-94bc9213-a192-417a-adad-d2c8152bfd40.png)
 
@@ -67,6 +77,17 @@ Is similar to the Hamming distance, without counting the number of characters no
 
 ![image](https://user-images.githubusercontent.com/8701464/128754227-fece78f8-3306-4d77-bbf8-47e3707d0c3d.png)
 
+```python
+    def __manhattan_distance(self):
+
+        if self.u.shape != self.v.shape:
+            return 'Incorrect lengths'
+        elif self.norm:
+            return abs(self.u - self.v).mean()            
+        else:
+            return abs(self.u - self.v).sum()
+
+```
 
 ![image](https://user-images.githubusercontent.com/8701464/128754252-49c8efd7-32f8-4410-815c-a8ea0dfba72a.png)
 
@@ -76,13 +97,59 @@ It is the shortest straight path distance between two points.
 
 ![image](https://user-images.githubusercontent.com/8701464/128754300-10456bab-7593-4875-b4f7-f974be64d94c.png)
 
+```python
+    def __euclidean_distance(self):
+
+        if self.u.shape != self.v.shape:
+            return 'Incorrect lengths'
+        return np.sqrt(np.sum(np.square(self.u - self.v)))
+
+```
+
 ![image](https://user-images.githubusercontent.com/8701464/128754307-00b1db64-529a-4b6c-a88e-2a71f6bf7954.png)
 
 
 # Levenshtein Distance or Wagner-Fischer algorithm
 It is somewhat similar to the Hamming distance, is used to measure the distance between two sequence of words based on their differences. In Short, is the minimum number of editions needed (deletions, substitutions or aditions) to convert one word to the other, the length of both words need not be equal.
 
-![image](https://user-images.githubusercontent.com/8701464/128754319-5976164c-b06b-49a7-8d19-9b020a200bb0.png)
+![image](https://user-images.githubusercontent.com/8701464/
+128754319-5976164c-b06b-49a7-8d19-9b020a200bb0.png)
+
+```python
+    def __levenshtein_distance(self):
+
+        u = self.u.lower()
+        v = self.v.lower()
+
+        if u == v: return 0
+        elif len(u) == 0: return len(v)
+        elif len(v) == 0: return len(u)
+
+        matrix = []
+
+        d_u = [0] * (len(v) + 1)
+        d_v = [0] * (len(v) + 1)
+
+        for i in range(len(d_u)):
+            d_u[i] = i
+        
+        for i in range(len(u)):
+            d_v[0] = i + 1
+            for j in range(len(v)):
+                cost = 0 if u[i] == v[j] else 1
+                d_v[j + 1] =  min(d_v[j] + 1, d_u[j + 1] + 1, d_u[j] + cost)
+            for j in range(len(d_u)):
+                d_u[j] = d_v[j]
+            matrix.append(copy.copy(d_v))
+        distance = d_v[len(v)]
+        matrix = np.array(matrix)
+        matrix = matrix.T
+        matrix = matrix[1:,]
+        matrix = pd.DataFrame(data = matrix,
+                               index= list(v),
+                               columns= list(u))
+
+```                               
 
 ![image](https://user-images.githubusercontent.com/8701464/128754334-507172c8-281a-4046-8338-0a4a521d738f.png)
 
@@ -100,7 +167,17 @@ If we have two words represented as a vectors using its numerical representation
 - Angle close to 90 means that the cosine similarity is close to 0, both words are not similar.
 - Angle close to 180 means that cosine similarity is close to -1, both words unrelated.
 
+```python
 ![image](https://user-images.githubusercontent.com/8701464/128754368-207792c3-397d-44ab-9806-0f8b06c59324.png)
+
+    def __cosine_distance_similarity(self):
+
+        distance = 1.0 - (np.dot(self.u, self.v)/
+                          (np.sqrt(sum(np.square(self.u))) * 
+                           np.sqrt(sum(np.square(self.v))))
+                          )
+        return distance
+```
 
 ![image](https://user-images.githubusercontent.com/8701464/128754380-7baa7023-2e1a-4f25-82f1-722657d045ae.png)
 
