@@ -187,7 +187,8 @@ If we have two words represented as a vectors using its numerical representation
 - Hamming, agree with the first option, agree with the second option
 - Manhattan, agree with the first option, not agree with the second and third option
 - Euclidean, agree with the first option , not agree with the second option
-- Levenshtein, agree with the first optionand agree with the second option Cosine, not agree with the first option
+- Levenshtein, agree with the first option and agree with the second option
+- Cosine, not agree with the first option
 
 ![image](https://user-images.githubusercontent.com/8701464/128754404-be063fc4-6468-4c23-828b-3dcb6f3c0ee3.png)
 
