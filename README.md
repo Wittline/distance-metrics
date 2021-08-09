@@ -74,9 +74,20 @@ Is similar to the Hamming distance, without counting the number of characters no
 # Euclidean Distance
 It is the shortest straight path distance between two points.
 
+![image](https://user-images.githubusercontent.com/8701464/128754300-10456bab-7593-4875-b4f7-f974be64d94c.png)
+
+![image](https://user-images.githubusercontent.com/8701464/128754307-00b1db64-529a-4b6c-a88e-2a71f6bf7954.png)
+
 
 # Levenshtein Distance or Wagner-Fischer algorithm
 It is somewhat similar to the Hamming distance, is used to measure the distance between two sequence of words based on their differences. In Short, is the minimum number of editions needed (deletions, substitutions or aditions) to convert one word to the other, the length of both words need not be equal.
+
+![image](https://user-images.githubusercontent.com/8701464/128754319-5976164c-b06b-49a7-8d19-9b020a200bb0.png)
+
+![image](https://user-images.githubusercontent.com/8701464/128754334-507172c8-281a-4046-8338-0a4a521d738f.png)
+
+![image](https://user-images.githubusercontent.com/8701464/128754348-f350b086-38aa-436f-a9a1-db0d3cf14d72.png)
+
 
 # Cosine Distance and Cosine similarity
 ### Remember that:
@@ -89,9 +100,16 @@ If we have two words represented as a vectors using its numerical representation
 - Angle close to 90 means that the cosine similarity is close to 0, both words are not similar.
 - Angle close to 180 means that cosine similarity is close to -1, both words unrelated.
 
+![image](https://user-images.githubusercontent.com/8701464/128754368-207792c3-397d-44ab-9806-0f8b06c59324.png)
+
+![image](https://user-images.githubusercontent.com/8701464/128754380-7baa7023-2e1a-4f25-82f1-722657d045ae.png)
+
 # Summary
 - Green is the first option, Yellow is the second option and Orange is the third option
 - Hamming, agree with the first option, agree with the second option
 - Manhattan, agree with the first option, not agree with the second and third option
 - Euclidean, agree with the first option , not agree with the second option
 - Levenshtein, agree with the first optionand agree with the second option Cosine, not agree with the first option
+
+![image](https://user-images.githubusercontent.com/8701464/128754404-be063fc4-6468-4c23-828b-3dcb6f3c0ee3.png)
+
