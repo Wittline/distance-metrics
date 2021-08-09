@@ -167,8 +167,9 @@ If we have two words represented as a vectors using its numerical representation
 - Angle close to 90 means that the cosine similarity is close to 0, both words are not similar.
 - Angle close to 180 means that cosine similarity is close to -1, both words unrelated.
 
-```python
 ![image](https://user-images.githubusercontent.com/8701464/128754368-207792c3-397d-44ab-9806-0f8b06c59324.png)
+
+```python
 
     def __cosine_distance_similarity(self):
 
