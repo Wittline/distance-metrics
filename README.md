@@ -191,3 +191,13 @@ If we have two words represented as a vectors using its numerical representation
 
 ![image](https://user-images.githubusercontent.com/8701464/128754404-be063fc4-6468-4c23-828b-3dcb6f3c0ee3.png)
 
+# Contributing and Feedback
+Any ideas or feedback about this repository?. Help me to improve it.
+
+# Authors
+- Created by <a href="https://www.linkedin.com/in/ramsescoraspe"><strong>Ramses Alexander Coraspe Valdez</strong></a>
+- Created on 2021
+
+# License
+This project is licensed under the terms of the Apache License.
+
