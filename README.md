@@ -1,6 +1,9 @@
 # Understanding Similarity Measures for Text Analysis
 The aim of this repository  is analyze how similar two words or terms are to each other, Distance metrics are the most common techniques to use for mesure similarities between words, there is an area called Document similarity that is responsible for searching similarities between sentences or paragraphs of text, this document only focuses on individual words or terms. It is worth mentioning that these techniques could be used for spell-checking, autocomplete sentences or correct words or senteces.
 
+![image](https://user-images.githubusercontent.com/8701464/128754115-e16da511-f567-4fbf-8e9a-076bd852f2bc.png)
+
+
 # Distance Metric of similarity
 There are a lot of Distance metrics that you can use to compute and mesure similarities between entities of text. The measure d is called distance metric of similarity if and only if satisfies the next coditions:
 
@@ -29,6 +32,10 @@ words = ['Similar', 'similares', 'iguales', 'parecidas', 'similaridad', 'isimral
         vectors = [np.array([ord(c) for c in w]) for w in vectors]
         return vectors
 ```
+
+![image](https://user-images.githubusercontent.com/8701464/128754146-bf65b87f-d61d-4137-b35c-df3acaecd272.png)
+
+
 > Converting to a vector of numerical values using Bag of character vectorization:
 
 
@@ -43,11 +50,26 @@ words = ['Similar', 'similares', 'iguales', 'parecidas', 'similaridad', 'isimral
         return list(u), bag
 ```
 
+![image](https://user-images.githubusercontent.com/8701464/128754164-2af9894b-71ee-4774-9453-be2ffb755246.png)
+
+
 # Hamming Distance
 It is the distance measured between two words assuming both has the same length or it is defined as the number of positions that have symbols between two words of equal length.
 
+![image](https://user-images.githubusercontent.com/8701464/128754190-6617ab28-a203-4153-b0ee-b4a1a40c88dc.png)
+
+
+![image](https://user-images.githubusercontent.com/8701464/128754208-94bc9213-a192-417a-adad-d2c8152bfd40.png)
+
+
 # Manhattan Distance
 Is similar to the Hamming distance, without counting the number of characters not matching and subtracting the difference between each pair of characters at each position of the two words.
+
+![image](https://user-images.githubusercontent.com/8701464/128754227-fece78f8-3306-4d77-bbf8-47e3707d0c3d.png)
+
+
+![image](https://user-images.githubusercontent.com/8701464/128754252-49c8efd7-32f8-4410-815c-a8ea0dfba72a.png)
+
 
 # Euclidean Distance
 It is the shortest straight path distance between two points.
