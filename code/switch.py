@@ -1,9 +1,9 @@
 class switch:
 
-	def __init__(self, variable, comparator=None, strict=False):
-		self.variable = variable
+	def __init__(self, vbe, comparator=None, strict=False):
+		self.vbe = vbe
 		self.matched = False
-		self.matching = False
+		self.match = False
 		if comparator:
 			self.comparator = comparator
 		else:
@@ -20,15 +20,15 @@ class switch:
 		if self.strict:
 			if self.matched:
 				return False
-		if self.matching or self.comparator(self.variable, expr):
+		if self.match or self.comparator(self.vbe, expr):
 			if not break_:
-				self.matching = True
+				self.match = True
 			else:
 				self.matched = True
-				self.matching = False
+				self.match = False
 			return True
 		else:
 			return False
 
 	def default(self):
-		return not self.matched and not self.matching
+		return not self.matched and not self.match
