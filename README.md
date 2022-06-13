@@ -1,8 +1,5 @@
 # Understanding Similarity Measures for Text Analysis
 
-### check the article here : 
-
-
 ### Check the article here:  <a href="https://python.plainenglish.io/understanding-similarity-measures-for-text-analysis-22cc0c6a46a9">Understanding Similarity Measures for Text Analysis</a>
 
 
