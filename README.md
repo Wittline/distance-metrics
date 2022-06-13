@@ -1,4 +1,11 @@
 # Understanding Similarity Measures for Text Analysis
+
+### check the article here : 
+
+
+### Check the article here:  <a href="https://python.plainenglish.io/understanding-similarity-measures-for-text-analysis-22cc0c6a46a9">Understanding Similarity Measures for Text Analysis</a>
+
+
 The aim of this repository  is analyze how similar two words or terms are to each other, Distance metrics are the most common techniques to use for mesure similarities between words, there is an area called Document similarity that is responsible for searching similarities between sentences or paragraphs of text, this document only focuses on individual words or terms. It is worth mentioning that these techniques could be used for spell-checking, autocomplete sentences or correct words or senteces.
 
 ![image](https://user-images.githubusercontent.com/8701464/128754115-e16da511-f567-4fbf-8e9a-076bd852f2bc.png)
